@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="uz" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aroma Craft Coffee — Premium Kofe Shop</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        coffee: {
+                            50: '#fdf8f6',
+                            100: '#f2e8e5',
+                            200: '#eaddd7',
+                            300: '#e0cec7',
+                            400: '#d2bab0',
+                            500: '#bfa094',
+                            600: '#a38275',
+                            700: '#846358',
+                            800: '#65483f',
+                            900: '#463028',
+                            950: '#2b1c17'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .smooth-transition { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    </style>
+</head>
+<body class="bg-coffee-50 dark:bg-coffee-950 text-coffee-900 dark:text-coffee-100 smooth-transition min-h-screen flex flex-col justify-between">
+
+    <!-- HEADER NAVIGATION -->
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-coffee-900/80 border-b border-coffee-200 dark:border-coffee-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-xl bg-coffee-700 flex items-center justify-center text-white font-bold text-xl shadow-lg group-hover:bg-coffee-600 smooth-transition">
+                    <i class="fa-solid fa-mug-hot"></i>
+                </div>
+                <span class="text-2xl font-extrabold tracking-tight text-coffee-900 dark:text-white">
+                    Aroma<span class="text-amber-600">Craft</span>
+                </span>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-8 font-medium">
+                <a href="index.html" class="text-amber-600 dark:text-amber-400 font-semibold" data-i18n="nav_home">Bosh sahifa</a>
+                <a href="shop.html" class="hover:text-amber-600 dark:hover:text-amber-400 smooth-transition" data-i18n="nav_shop">Katalog</a>
+                <a href="product-detail.html" class="hover:text-amber-600 dark:hover:text-amber-400 smooth-transition" data-i18n="nav_product">Mahsulot</a>
+                <a href="cart-checkout.html" class="hover:text-amber-600 dark:hover:text-amber-400 smooth-transition" data-i18n="nav_cart">Savatcha</a>
+                <a href="about-contact.html" class="hover:text-amber-600 dark:hover:text-amber-400 smooth-transition" data-i18n="nav_about">Biz haqimizda</a>
+            </nav>
+
+            <!-- Actions: Lang, Theme, Wishlist, Cart -->
+            <div class="flex items-center space-x-4">
+                <!-- Language Switcher -->
+                <select id="langSwitch" class="bg-coffee-100 dark:bg-coffee-800 border-none text-sm font-semibold rounded-lg px-2.5 py-1.5 focus:ring-2 focus:ring-amber-500 cursor-pointer">
+                    <option value="uz">UZ</option>
+                    <option value="ru">RU</option>
+                    <option value="en">EN</option>
+                </select>
+
+                <!-- Theme Toggle -->
+                <button id="themeToggle" class="w-10 h-10 rounded-lg bg-coffee-100 dark:bg-coffee-800 flex items-center justify-center hover:bg-coffee-200 dark:hover:bg-coffee-700 smooth-transition" aria-label="Toggle Theme">
+                    <i class="fa-solid fa-moon dark:hidden text-coffee-700"></i>
+                    <i class="fa-solid fa-sun hidden dark:block text-amber-400"></i>
+                </button>
+
+                <!-- Wishlist Counter -->
+                <a href="shop.html#wishlist" class="relative w-10 h-10 rounded-lg bg-coffee-100 dark:bg-coffee-800 flex items-center justify-center hover:bg-coffee-200 dark:hover:bg-coffee-700 smooth-transition" aria-label="Wishlist">
+                    <i class="fa-solid fa-heart text-rose-500"></i>
+                    <span id="wishlistBadge" class="absolute -top-1 -right-1 bg-rose-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
+                </a>
+
+                <!-- Cart Counter -->
+                <a href="cart-checkout.html" class="relative w-10 h-10 rounded-lg bg-coffee-100 dark:bg-coffee-800 flex items-center justify-center hover:bg-coffee-200 dark:hover:bg-coffee-700 smooth-transition" aria-label="Cart">
+                    <i class="fa-solid fa-shopping-bag text-amber-600 dark:text-amber-400"></i>
+                    <span id="cartBadge" class="absolute -top-1 -right-1 bg-amber-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow">
+        <!-- HERO SECTION -->
+        <section class="relative overflow-hidden py-20 lg:py-32">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6 text-center lg:text-left">
+                        <span class="inline-flex items-center space-x-2 bg-amber-100 dark:bg-amber-900/40 text-amber-800 dark:text-amber-300 px-4 py-1.5 rounded-full text-sm font-semibold">
+                            <i class="fa-solid fa-award"></i>
+                            <span data-i18n="hero_badge">100% Premium Arabica Donlari</span>
+                        </span>
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+                            <span data-i18n="hero_title_1">Har bir qultumda</span> <br>
+                            <span class="text-amber-600 dark:text-amber-500" data-i18n="hero_title_2">Haqiqiy Kofe Estetikasi</span>
+                        </h1>
+                        <p class="text-lg text-coffee-600 dark:text-coffee-300 max-w-xl mx-auto lg:mx-0" data-i18n="hero_desc">
+                            Dunyoning eng sara plantatsiyalaridan keltirilgan, maxsus texnologiyada qovurilgan va sevgi bilan tayyorlanadigan kofe lazzatini kashf eting.
+                        </p>
+                        <div class="flex flex-col sm:flex-row justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
+                            <a href="shop.html" class="px-8 py-4 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold shadow-lg shadow-amber-600/30 smooth-transition text-center" data-i18n="hero_btn_shop">
+                                Katalogga o'tish
+                            </a>
+                            <a href="about-contact.html" class="px-8 py-4 rounded-xl bg-coffee-200 dark:bg-coffee-800 hover:bg-coffee-300 dark:hover:bg-coffee-700 font-bold smooth-transition text-center" data-i18n="hero_btn_about">
+                                Batafsil ma'lumot
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Hero Visual Grid -->
+                    <div class="relative grid grid-cols-2 gap-4">
+                        <div class="space-y-4">
+                            <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=80&w=600" alt="Coffee Cup" class="rounded-2xl shadow-xl object-cover h-64 w-full transform -translate-y-4">
+                            <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80&w=600" alt="Coffee Beans" class="rounded-2xl shadow-xl object-cover h-48 w-full">
+                        </div>
+                        <div class="space-y-4 pt-8">
+                            <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&q=80&w=600" alt="Coffee Brewing" class="rounded-2xl shadow-xl object-cover h-48 w-full">
+                            <img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&q=80&w=600" alt="Coffee Roasting" class="rounded-2xl shadow-xl object-cover h-64 w-full transform translate-y-4">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURES / WHY US -->
+        <section class="py-16 bg-white dark:bg-coffee-900 border-y border-coffee-200 dark:border-coffee-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="flex items-start space-x-4 p-6 rounded-2xl bg-coffee-50 dark:bg-coffee-950">
+                        <div class="w-12 h-12 rounded-xl bg-amber-100 dark:bg-amber-900/50 text-amber-600 dark:text-amber-400 flex items-center justify-center text-xl font-bold flex-shrink-0">
+                            <i class="fa-solid fa-seedling"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold mb-1" data-i18n="feat_1_title">100% Organik Donlar</h3>
+                            <p class="text-sm text-coffee-600 dark:text-coffee-400" data-i18n="feat_1_desc">Efiopiya, Kolumbiya va Braziliyaning eng sara plantatsiyalaridan.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4 p-6 rounded-2xl bg-coffee-50 dark:bg-coffee-950">
+                        <div class="w-12 h-12 rounded-xl bg-amber-100 dark:bg-amber-900/50 text-amber-600 dark:text-amber-400 flex items-center justify-center text-xl font-bold flex-shrink-0">
+                            <i class="fa-solid fa-fire-flame-curved"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold mb-1" data-i18n="feat_2_title">Maxsus Qovurish</h3>
+                            <p class="text-sm text-coffee-600 dark:text-coffee-400" data-i18n="feat_2_desc">Har bir nav uchun alohida mukammal qovurish darajasi va tazelik.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4 p-6 rounded-2xl bg-coffee-50 dark:bg-coffee-950">
+                        <div class="w-12 h-12 rounded-xl bg-amber-100 dark:bg-amber-900/50 text-amber-600 dark:text-amber-400 flex items-center justify-center text-xl font-bold flex-shrink-0">
+                            <i class="fa-solid fa-truck-fast"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold mb-1" data-i18n="feat_3_title">Tezkor yetkazish</h3>
+                            <p class="text-sm text-coffee-600 dark:text-coffee-400" data-i18n="feat_3_desc">Buyurtmangiz to'g'ridan-to'g'ri Telegram bot orqali qabul qilinib, tezda yetkaziladi.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURED PRODUCTS (BESTSELLERS) -->
+        <section class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-end mb-12">
+                    <div>
+                        <span class="text-amber-600 dark:text-amber-400 font-bold uppercase tracking-wider text-sm" data-i18n="prod_subtitle">Tanlangan tovarlar</span>
+                        <h2 class="text-3xl font-extrabold mt-1" data-i18n="prod_title">Eng mashhur kofe turlari</h2>
+                    </div>
+                    <a href="shop.html" class="hidden sm:inline-flex items-center space-x-2 font-bold text-amber-600 dark:text-amber-400 hover:underline">
+                        <span data-i18n="view_all">Barchasini ko'rish</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Product Grid -->
+                <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Javascript will inject 4 bestseller products dynamically with distinct images, like buttons, and cart buttons -->
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS SECTION -->
+        <section class="py-20 bg-white dark:bg-coffee-900 border-t border-coffee-200 dark:border-coffee-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <span class="text-amber-600 dark:text-amber-400 font-bold uppercase tracking-wider text-sm" data-i18n="testi_subtitle">Mijozlar fikri</span>
+                <h2 class="text-3xl font-extrabold mt-1 mb-12" data-i18n="testi_title">Kofe ixlosmandlari nima deydi?</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+                    <div class="p-8 rounded-2xl bg-coffee-50 dark:bg-coffee-950 relative">
+                        <div class="flex text-amber-500 mb-4 space-x-1">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-coffee-700 dark:text-coffee-300 mb-6 italic" data-i18n="testi_1">"Efiopiya Yirgacheffe kofesi shunchaki mukammal! Har tong shu hid bilan boshlanadi. Telegram bot orqali buyurtma berish juda oson ekan."</p>
+                        <div class="flex items-center space-x-4">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150" alt="User" class="w-12 h-12 rounded-full object-cover">
+                            <div>
+                                <h4 class="font-bold">Madina Alimova</h4>
+                                <span class="text-xs text-coffee-500">Toshkent sh.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-8 rounded-2xl bg-coffee-50 dark:bg-coffee-950 relative">
+                        <div class="flex text-amber-500 mb-4 space-x-1">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-coffee-700 dark:text-coffee-300 mb-6 italic" data-i18n="testi_2">"Qovurish darajasi va ta'm profili haqiqiy professional darajada. Savatchaga qo'shib, bir zumda botdan xarid qildim. Tavsiya qilaman!"</p>
+                        <div class="flex items-center space-x-4">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=150" alt="User" class="w-12 h-12 rounded-full object-cover">
+                            <div>
+                                <h4 class="font-bold">Jasur Rahimov</h4>
+                                <span class="text-xs text-coffee-500">Samarqand sh.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-8 rounded-2xl bg-coffee-50 dark:bg-coffee-950 relative">
+                        <div class="flex text-amber-500 mb-4 space-x-1">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-coffee-700 dark:text-coffee-300 mb-6 italic" data-i18n="testi_3">"Dark mode va dizayn dizayner ko'zi bilan qaraganda juda zo'r chiqqan. Like bosib tovarlarni saqlab qo'yish juda qulay funksiya."</p>
+                        <div class="flex items-center space-x-4">
+                            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=150" alt="User" class="w-12 h-12 rounded-full object-cover">
+                            <div>
+                                <h4 class="font-bold">Zilola Karimova</h4>
+                                <span class="text-xs text-coffee-500">Buxoro sh.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-coffee-900 text-coffee-200 pt-16 pb-12 border-t border-coffee-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-xl bg-amber-600 flex items-center justify-center text-white font-bold text-xl">
+                            <i class="fa-solid fa-mug-hot"></i>
+                        </div>
+                        <span class="text-2xl font-extrabold tracking-tight text-white">
+                            Aroma<span class="text-amber-500">Craft</span>
+                        </span>
+                    </div>
+                    <p class="text-sm text-coffee-400" data-i18n="footer_desc">
+                        Haqiqiy kofe ixlosmandlari uchun maxsus tayyorlangan premium internet do'kon va qahva uyi.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4" data-i18n="footer_links">Tezkor havolalar</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="index.html" class="hover:text-amber-400 smooth-transition" data-i18n="nav_home">Bosh sahifa</a></li>
+                        <li><a href="shop.html" class="hover:text-amber-400 smooth-transition" data-i18n="nav_shop">Katalog</a></li>
+                        <li><a href="product-detail.html" class="hover:text-amber-400 smooth-transition" data-i18n="nav_product">Mahsulot</a></li>
+                        <li><a href="about-contact.html" class="hover:text-amber-400 smooth-transition" data-i18n="nav_about">Biz haqimizda</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4" data-i18n="footer_contact">Aloqa</h4>
+                    <ul class="space-y-2 text-sm text-coffee-400">
+                        <li><i class="fa-solid fa-location-dot mr-2 text-amber-500"></i> Toshkent sh., Amir Temur ko'chasi 45</li>
+                        <li><i class="fa-solid fa-phone mr-2 text-amber-500"></i> +998 91 538 70 92</li>
+                        <li><i class="fa-solid fa-envelope mr-2 text-amber-500"></i> support@aromacraft.uz</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4" data-i18n="footer_social">Ijtimoiy tarmoqlar</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-lg bg-coffee-800 flex items-center justify-center hover:bg-amber-600 hover:text-white smooth-transition"><i class="fa-brands fa-telegram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-lg bg-coffee-800 flex items-center justify-center hover:bg-amber-600 hover:text-white smooth-transition"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-lg bg-coffee-800 flex items-center justify-center hover:bg-amber-600 hover:text-white smooth-transition"><i class="fa-brands fa-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-coffee-800 pt-8 text-center text-xs text-coffee-500">
+                &copy; 2026 Aroma Craft Coffee. All rights reserved. Senior Full-Stack Architecture.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC & LOCALSTORAGE STATE -->
+    <script>
+        // Translations Dictionary (UZ, RU, EN)
+        const translations = {
+            uz: {
+                nav_home: "Bosh sahifa",
+                nav_shop: "Katalog",
+                nav_product: "Mahsulot",
+                nav_cart: "Savatcha",
+                nav_about: "Biz haqimizda",
+                hero_badge: "100% Premium Arabica Donlari",
+                hero_title_1: "Har bir qultumda",
+                hero_title_2: "Haqiqiy Kofe Estetikasi",
+                hero_desc: "Dunyoning eng sara plantatsiyalaridan keltirilgan, maxsus texnologiyada qovurilgan va sevgi bilan tayyorlanadigan kofe lazzatini kashf eting.",
+                hero_btn_shop: "Katalogga o'tish",
+                hero_btn_about: "Batafsil ma'lumot",
+                feat_1_title: "100% Organik Donlar",
+                feat_1_desc: "Efiopiya, Kolumbiya va Braziliyaning eng sara plantatsiyalaridan.",
+                feat_2_title: "Maxsus Qovurish",
+                feat_2_desc: "Har bir nav uchun alohida mukammal qovurish darajasi va tazelik.",
+                feat_3_title: "Tezkor yetkazish",
+                feat_3_desc: "Buyurtmangiz to'g'ridan-to'g'ri Telegram bot orqali qabul qilinib, tezda yetkaziladi.",
+                prod_subtitle: "Tanlangan tovarlar",
+                prod_title: "Eng mashhur kofe turlari",
+                view_all: "Barchasini ko'rish",
+                testi_subtitle: "Mijozlar fikri",
+                testi_title: "Kofe ixlosmandlari nima deydi?",
+                testi_1: `"Efiopiya Yirgacheffe kofesi shunchaki mukammal! Har tong shu hid bilan boshlanadi. Telegram bot orqali buyurtma berish juda oson ekan."`,
+                testi_2: `"Qovurish darajasi va ta'm profili haqiqiy professional darajada. Savatchaga qo'shib, bir zumda botdan xarid qildim. Tavsiya qilaman!"`,
+                testi_3: `"Dark mode va dizayn dizayner ko'zi bilan qaraganda juda zo'r chiqqan. Like bosib tovarlarni saqlab qo'yish juda qulay funksiya."`,
+                footer_desc: "Haqiqiy kofe ixlosmandlari uchun maxsus tayyorlangan premium internet do'kon va qahva uyi.",
+                footer_links: "Tezkor havolalar",
+                footer_contact: "Aloqa",
+                footer_social: "Ijtimoiy tarmoqlar",
+                add_to_cart: "Savatchaga",
+                in_cart: "Qo'shildi"
+            },
+            ru: {
+                nav_home: "Главная",
+                nav_shop: "Каталог",
+                nav_product: "Товар",
+                nav_cart: "Корзина",
+                nav_about: "О нас",
+                hero_badge: "100% Премиальные зерна арабики",
+                hero_title_1: "В каждом глотке",
+                hero_title_2: "Истинная эстетика кофе",
+                hero_desc: "Откройте для себя вкус кофе с лучших плантаций мира, обжаренного по специальной технологии и приготовленного с любовью.",
+                hero_btn_shop: "Перейти в каталог",
+                hero_btn_about: "Подробнее",
+                feat_1_title: "100% Органические зерна",
+                feat_1_desc: "С лучших плантаций Эфиопии, Колумбии и Бразилии.",
+                feat_2_title: "Особая обжарка",
+                feat_2_desc: "Идеальная степень обжарки и свежесть для каждого сорта.",
+                feat_3_title: "Быстрая доставка",
+                feat_3_desc: "Ваш заказ принимается напрямую через Telegram-бот и доставляется быстро.",
+                prod_subtitle: "Избранные товары",
+                prod_title: "Самые популярные виды кофе",
+                view_all: "Смотреть все",
+                testi_subtitle: "Отзывы клиентов",
+                testi_title: "Что говорят любители кофе?",
+                testi_1: `"Эфиопия Иргачефф просто восхитительна! Каждое утро начинается с этого аромата. Заказ через Telegram-бот очень прост."`,
+                testi_2: `"Степень обжарки и вкусовой профиль на профессиональном уровне. Добавил в корзину и купил через бота. Рекомендую!"`,
+                testi_3: `"Темный режим и дизайн просто великолепны. Функция лайков для сохранения товаров очень удобна."`,
+                footer_desc: "Премиальный интернет-магазин и кофейня, созданные специально для истинных любителей кофе.",
+                footer_links: "Быстрые ссылки",
+                footer_contact: "Контакты",
+                footer_social: "Социальные сети",
+                add_to_cart: "В корзину",
+                in_cart: "Добавлено"
+            },
+            en: {
+                nav_home: "Home",
+                nav_shop: "Shop",
+                nav_product: "Product",
+                nav_cart: "Cart",
+                nav_about: "About Us",
+                hero_badge: "100% Premium Arabica Beans",
+                hero_title_1: "In Every Sip",
+                hero_title_2: "True Coffee Aesthetics",
+                hero_desc: "Discover the taste of coffee brought from the world's finest plantations, specially roasted and prepared with love.",
+                hero_btn_shop: "Go to Shop",
+                hero_btn_about: "Learn More",
+                feat_1_title: "100% Organic Beans",
+                feat_1_desc: "From the finest plantations in Ethiopia, Colombia, and Brazil.",
+                feat_2_title: "Special Roasting",
+                feat_2_desc: "Perfect roasting degree and ultimate freshness for every variety.",
+                feat_3_title: "Fast Delivery",
+                feat_3_desc: "Your order is accepted directly via Telegram bot and delivered promptly.",
+                prod_subtitle: "Featured Products",
+                prod_title: "Most Popular Coffee Types",
+                view_all: "View All",
+                testi_subtitle: "Testimonials",
+                testi_title: "What Coffee Lovers Say",
+                testi_1: `"Ethiopia Yirgacheffe coffee is simply amazing! Every morning starts with this aroma. Ordering via Telegram bot is very easy."`,
+                testi_2: `"The roasting level and flavor profile are at a professional level. Added to cart and bought instantly through the bot. Highly recommended!"`,
+                testi_3: `"Dark mode and design look gorgeous from a designer's perspective. Liking products to save them is super convenient."`,
+                footer_desc: "A premium online store and coffee shop specially crafted for true coffee enthusiasts.",
+                footer_links: "Quick Links",
+                footer_contact: "Contact",
+                footer_social: "Social Media",
+                add_to_cart: "Add to Cart",
+                in_cart: "Added"
+            }
+        };
+
+        // Bestseller Products Data (Distinct Images & Details)
+        const products = [
+            {
+                id: 1,
+                name: "Ethiopia Yirgacheffe",
+                category: "Don Kofe / 250g",
+                price: 145000,
+                image: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&q=80&w=600",
+                rating: 5
+            },
+            {
+                id: 2,
+                name: "Colombia Supremo",
+                category: "Maydalangan / 500g",
+                price: 180000,
+                image: "https://images.unsplash.com/photo-1587734195503-904fca47e0e9?auto=format&fit=crop&q=80&w=600",
+                rating: 5
+            },
+            {
+                id: 3,
+                name: "Brazil Santos Dark",
+                category: "Don Kofe / 1kg",
+                price: 320000,
+                image: "https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?auto=format&fit=crop&q=80&w=600",
+                rating: 4
+            },
+            {
+                id: 4,
+                name: "Guatemala Antigua",
+                category: "Don Kofe / 250g",
+                price: 160000,
+                image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=80&w=600",
+                rating: 5
+            }
+        ];
+
+        // State Management
+        let currentLang = localStorage.getItem('aroma_lang') || 'uz';
+        let currentTheme = localStorage.getItem('aroma_theme') || 'light';
+        let cart = JSON.parse(localStorage.getItem('aroma_cart')) || [];
+        let wishlist = JSON.parse(localStorage.getItem('aroma_wishlist')) || [];
+
+        // DOM Elements
+        const langSwitch = document.getElementById('langSwitch');
+        const themeToggle = document.getElementById('themeToggle');
+        const cartBadge = document.getElementById('cartBadge');
+        const wishlistBadge = document.getElementById('wishlistBadge');
+        const productGrid = document.getElementById('productGrid');
+
+        // Initialize App
+        function initApp() {
+            // Set Lang
+            langSwitch.value = currentLang;
+            applyTranslations(currentLang);
+
+            // Set Theme
+            if (currentTheme === 'dark') {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+
+            // Render Products
+            renderProducts();
+            updateBadges();
+        }
+
+        // Apply Translations
+        function applyTranslations(lang) {
+            currentLang = lang;
+            localStorage.setItem('aroma_lang', lang);
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+        }
+
+        // Render Bestseller Products
+        function renderProducts() {
+            productGrid.innerHTML = '';
+            products.forEach(p => {
+                const isLiked = wishlist.includes(p.id);
+                const isCarted = cart.some(item => item.id === p.id);
+
+                const card = document.createElement('div');
+                card.className = "bg-white dark:bg-coffee-950 rounded-2xl p-4 shadow-lg border border-coffee-200 dark:border-coffee-800 flex flex-col justify-between group smooth-transition hover:-translate-y-1";
+                card.innerHTML = `
+                    <div class="relative overflow-hidden rounded-xl mb-4 h-60">
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 smooth-transition">
+                        <button onclick="toggleWishlist(${p.id})" class="absolute top-3 right-3 w-10 h-10 rounded-full bg-white/80 dark:bg-coffee-900/80 backdrop-blur-md flex items-center justify-center text-rose-500 shadow-md hover:scale-110 smooth-transition">
+                            <i class="${isLiked ? 'fa-solid' : 'fa-regular'} fa-heart text-lg"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-2 mb-4">
+                        <span class="text-xs font-semibold text-amber-600 dark:text-amber-400 uppercase tracking-wider">${p.category}</span>
+                        <h3 class="text-lg font-bold text-coffee-900 dark:text-white">${p.name}</h3>
+                        <div class="flex items-center space-x-1 text-amber-500 text-xs">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            <span class="text-coffee-500 ml-1">(5.0)</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-coffee-100 dark:border-coffee-900">
+                        <span class="text-xl font-extrabold text-coffee-900 dark:text-white">${p.price.toLocaleString()} so'm</span>
+                        <button onclick="addToCart(${p.id})" class="px-4 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-sm shadow-md shadow-amber-600/20 flex items-center space-x-2 smooth-transition">
+                            <i class="fa-solid fa-shopping-bag"></i>
+                            <span>${translations[currentLang].add_to_cart}</span>
+                        </button>
+                    </div>
+                `;
+                productGrid.appendChild(card);
+            });
+        }
+
+        // Toggle Wishlist (Like)
+        window.toggleWishlist = function(id) {
+            const index = wishlist.indexOf(id);
+            if (index > -1) {
+                wishlist.splice(index, 1);
+            } else {
+                wishlist.push(id);
+            }
+            localStorage.setItem('aroma_wishlist', JSON.stringify(wishlist));
+            renderProducts();
+            updateBadges();
+        }
+
+        // Add to Cart
+        window.addToCart = function(id) {
+            const product = products.find(p => p.id === id);
+            const existing = cart.find(item => item.id === id);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+            localStorage.setItem('aroma_cart', JSON.stringify(cart));
+            updateBadges();
+            
+            // Notification toast effect or visual feedback
+            alert(`"${product.name}" savatchaga qo'shildi!`);
+        }
+
+        // Update Badges
+        function updateBadges() {
+            cartBadge.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+            wishlistBadge.textContent = wishlist.length;
+        }
+
+        // Event Listeners
+        langSwitch.addEventListener('change', (e) => {
+            applyTranslations(e.target.value);
+            renderProducts();
+        });
+
+        themeToggle.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                currentTheme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                currentTheme = 'dark';
+            }
+            localStorage.setItem('aroma_theme', currentTheme);
+        });
+
+        // Run on load
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

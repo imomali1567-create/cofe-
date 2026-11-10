@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="uz" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katalog & Tovarlar — Aroma Craft Coffee</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        coffee: {
+                            50: '#fdf8f6',
+                            100: '#f2e8e5',
+                            200: '#eaddd7',
+                            300: '#e0cec7',
+                            400: '#d2bab0',
+                            500: '#bfa094',
+                            600: '#a38275',
+                            700: '#846358',
+                            800: '#65483f',
+                            900: '#463028',
+                            950: '#2b1c17'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .smooth-transition { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    </style>
+</head>
+<body class="bg-coffee-50 dark:bg-coffee-950 text-coffee-900 dark:text-coffee-100 smooth-transition min-h-screen flex flex-col justify-between">
+
+    <!-- HEADER NAVIGATION -->
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-coffee-900/80 border-b border-coffee-200 dark:border-coffee-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-xl bg-coffee-700 flex items-center justify-center text-white font-bold text-xl shadow-lg group-hover:bg-coffee-600 smooth-transition">
+                    <i class="fa-solid fa-mug-hot"></i>
+                </div>
+                <span class="text-2xl font-extrabold tracking-tight text-coffee-900 dark:text-white">
+                    Aroma<span class="text-amber-600">Craft</span>
+                </span>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-8 font-medium">
+                <a href="index.html" class="hover:text-amber-600 dark:hover:text-amber-400 smooth-transition" data-i18n="nav_home">Bosh sahifa</a>
+                <a href="shop.html" class="text-amber-600 dark:text-amber-400 font-semibold" data-i18n="nav_shop">Katalog</a>
+                <a href="product-detail.html" class="hover:text-amber-600 dark:hover:text-amber-400 smooth-transition" data-i18n="nav_product">Mahsulot</a>
+                <a href="cart-checkout.html" class="hover:text-amber-600 dark:hover:text-amber-400 smooth-transition" data-i18n="nav_cart">Savatcha</a>
+                <a href="about-contact.html" class="hover:text-amber-600 dark:hover:text-amber-400 smooth-transition" data-i18n="nav_about">Biz haqimizda</a>
+            </nav>
+
+            <!-- Actions: Lang, Theme, Wishlist, Cart -->
+            <div class="flex items-center space-x-4">
+                <!-- Language Switcher -->
+                <select id="langSwitch" class="bg-coffee-100 dark:bg-coffee-800 border-none text-sm font-semibold rounded-lg px-2.5 py-1.5 focus:ring-2 focus:ring-amber-500 cursor-pointer">
+                    <option value="uz">UZ</option>
+                    <option value="ru">RU</option>
+                    <option value="en">EN</option>
+                </select>
+
+                <!-- Theme Toggle -->
+                <button id="themeToggle" class="w-10 h-10 rounded-lg bg-coffee-100 dark:bg-coffee-800 flex items-center justify-center hover:bg-coffee-200 dark:hover:bg-coffee-700 smooth-transition" aria-label="Toggle Theme">
+                    <i class="fa-solid fa-moon dark:hidden text-coffee-700"></i>
+                    <i class="fa-solid fa-sun hidden dark:block text-amber-400"></i>
+                </button>
+
+                <!-- Wishlist Counter -->
+                <button onclick="switchTab('wishlist')" class="relative w-10 h-10 rounded-lg bg-coffee-100 dark:bg-coffee-800 flex items-center justify-center hover:bg-coffee-200 dark:hover:bg-coffee-700 smooth-transition" aria-label="Wishlist">
+                    <i class="fa-solid fa-heart text-rose-500"></i>
+                    <span id="wishlistBadge" class="absolute -top-1 -right-1 bg-rose-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
+                </button>
+
+                <!-- Cart Counter -->
+                <a href="cart-checkout.html" class="relative w-10 h-10 rounded-lg bg-coffee-100 dark:bg-coffee-800 flex items-center justify-center hover:bg-coffee-200 dark:hover:bg-coffee-700 smooth-transition" aria-label="Cart">
+                    <i class="fa-solid fa-shopping-bag text-amber-600 dark:text-amber-400"></i>
+                    <span id="cartBadge" class="absolute -top-1 -right-1 bg-amber-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Page Header & Tabs (Catalog vs Wishlist) -->
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4 border-b border-coffee-200 dark:border-coffee-800 pb-6">
+                <div>
+                    <h1 class="text-3xl font-extrabold" data-i18n="shop_header_title">Kofe Katalogi va Sevimlilar</h1>
+                    <p class="text-coffee-600 dark:text-coffee-400 text-sm mt-1" data-i18n="shop_header_desc">O'zingizga yoqqan eng sara donlarni tanlang va savatchaga qo'shing.</p>
+                </div>
+                <!-- Tabs -->
+                <div class="flex space-x-2 bg-coffee-200/60 dark:bg-coffee-900 p-1.5 rounded-xl">
+                    <button id="tabCatalogBtn" onclick="switchTab('catalog')" class="px-5 py-2 rounded-lg font-bold text-sm bg-white dark:bg-coffee-800 text-amber-600 dark:text-amber-400 shadow-sm smooth-transition" data-i18n="tab_catalog">
+                        Katalog
+                    </button>
+                    <button id="tabWishlistBtn" onclick="switchTab('wishlist')" class="px-5 py-2 rounded-lg font-bold text-sm text-coffee-700 dark:text-coffee-300 hover:text-amber-600 smooth-transition flex items-center space-x-2">
+                        <span data-i18n="tab_wishlist">Sevimlilar</span>
+                        <span id="wishlistCountTag" class="bg-rose-500 text-white text-xs px-2 py-0.5 rounded-full">0</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- SEARCH AND FILTERS (Only visible in catalog tab) -->
+            <div id="filterSection" class="grid grid-cols-1 lg:grid-cols-4 gap-8 mb-12">
+                <!-- Sidebar Filters -->
+                <div class="space-y-6 bg-white dark:bg-coffee-900 p-6 rounded-2xl border border-coffee-200 dark:border-coffee-800 h-fit">
+                    <h3 class="font-extrabold text-lg flex items-center justify-between">
+                        <span data-i18n="filters_title">Filtrlar</span>
+                        <button onclick="resetFilters()" class="text-xs text-amber-600 hover:underline" data-i18n="reset_filter">Tozalash</button>
+                    </h3>
+
+                    <!-- Search Input -->
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-coffee-500 mb-2" data-i18n="search_label">Qidiruv</label>
+                        <div class="relative">
+                            <input type="text" id="searchInput" placeholder="Kofe nomini yozing..." class="w-full bg-coffee-50 dark:bg-coffee-950 border border-coffee-200 dark:border-coffee-800 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500">
+                            <i class="fa-solid fa-search absolute right-3 top-3.5 text-coffee-400 text-sm"></i>
+                        </div>
+                    </div>
+
+                    <!-- Category Filter -->
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-coffee-500 mb-2" data-i18n="category_label">Kategoriya</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-2 text-sm cursor-pointer">
+                                <input type="radio" name="category" value="all" checked class="text-amber-600 focus:ring-amber-500">
+                                <span data-i18n="cat_all">Barcha turlar</span>
+                            </label>
+                            <label class="flex items-center space-x-2 text-sm cursor-pointer">
+                                <input type="radio" name="category" value="Don Kofe" class="text-amber-600 focus:ring-amber-500">
+                                <span>Don Kofe</span>
+                            </label>
+                            <label class="flex items-center space-x-2 text-sm cursor-pointer">
+                                <input type="radio" name="category" value="Maydalangan" class="text-amber-600 focus:ring-amber-500">
+                                <span>Maydalangan Kofe</span>
+                            </label>
+                            <label class="flex items-center space-x-2 text-sm cursor-pointer">
+                                <input type="radio" name="category" value="Kapsulalar" class="text-amber-600 focus:ring-amber-500">
+                                <span>Kofe Kapsulalari</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Roast Level Filter -->
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-coffee-500 mb-2" data-i18n="roast_label">Qovurish darajasi</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-2 text-sm cursor-pointer">
+                                <input type="checkbox" value="Light" class="roast-checkbox text-amber-600 rounded focus:ring-amber-500">
+                                <span>Yengil (Light Roast)</span>
+                            </label>
+                            <label class="flex items-center space-x-2 text-sm cursor-pointer">
+                                <input type="checkbox" value="Medium" class="roast-checkbox text-amber-600 rounded focus:ring-amber-500">
+                                <span>O'rta (Medium Roast)</span>
+                            </label>
+                            <label class="flex items-center space-x-2 text-sm cursor-pointer">
+                                <input type="checkbox" value="Dark" class="roast-checkbox text-amber-600 rounded focus:ring-amber-500">
+                                <span>To'q (Dark Roast)</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Grid Container -->
+                <div class="lg:col-span-3">
+                    <div class="flex justify-between items-center mb-6">
+                        <span id="productCountText" class="text-sm font-semibold text-coffee-600 dark:text-coffee-400">Jami 8 ta mahsulot topildi</span>
+                        <select id="sortBy" class="bg-white dark:bg-coffee-900 border border-coffee-200 dark:border-coffee-800 text-sm font-semibold rounded-xl px-3 py-2 focus:ring-2 focus:ring-amber-500 cursor-pointer">
+                            <option value="default" data-i18n="sort_default">Saralash: Asosiy</option>
+                            <option value="price_low" data-i18n="sort_price_low">Narx: Arzondan qimmatga</option>
+                            <option value="price_high" data-i18n="sort_price_high">Narx: Qimmatdan arzonga</option>
+                            <option value="name" data-i18n="sort_name">Nomi bo'yicha (A-Z)</option>
+                        </select>
+                    </div>
+
+                    <!-- Grid -->
+                    <div id="shopProductGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Dynamic Products -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wishlist View Container (Hidden by default, shown when tab is wishlist) -->
+            <div id="wishlistContainer" class="hidden">
+                <div id="wishlistGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Wishlist items -->
+                </div>
+                <div id="emptyWishlist" class="hidden text-center py-20 space-y-4">
+                    <div class="w-20 h-20 bg-coffee-200 dark:bg-coffee-900 rounded-full flex items-center justify-center mx-auto text-3xl text-coffee-500">
+                        <i class="fa-solid fa-heart-crack"></i>
+                    </div>
+                    <h3 class="text-xl font-bold" data-i18n="empty_wishlist_title">Sevimlilar ro'yxati bo'sh</h3>
+                    <p class="text-coffee-500 text-sm max-w-sm mx-auto" data-i18n="empty_wishlist_desc">Hali hech qanday tovarga yurakcha (like) bosmagansiz. Katalogdan yoqqan mahsulotlarni belgilang!</p>
+                    <button onclick="switchTab('catalog')" class="px-6 py-3 rounded-xl bg-amber-600 text-white font-bold text-sm shadow-lg hover:bg-amber-700 smooth-transition" data-i18n="go_catalog">
+                        Katalogga o'tish
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-coffee-900 text-coffee-200 pt-16 pb-12 border-t border-coffee-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-xl bg-amber-600 flex items-center justify-center text-white font-bold text-xl">
+                            <i class="fa-solid fa-mug-hot"></i>
+                        </div>
+                        <span class="text-2xl font-extrabold tracking-tight text-white">
+                            Aroma<span class="text-amber-500">Craft</span>
+                        </span>
+                    </div>
+                    <p class="text-sm text-coffee-400" data-i18n="footer_desc">
+                        Haqiqiy kofe ixlosmandlari uchun maxsus tayyorlangan premium internet do'kon va qahva uyi.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4" data-i18n="footer_links">Tezkor havolalar</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="index.html" class="hover:text-amber-400 smooth-transition" data-i18n="nav_home">Bosh sahifa</a></li>
+                        <li><a href="shop.html" class="hover:text-amber-400 smooth-transition" data-i18n="nav_shop">Katalog</a></li>
+                        <li><a href="product-detail.html" class="hover:text-amber-400 smooth-transition" data-i18n="nav_product">Mahsulot</a></li>
+                        <li><a href="about-contact.html" class="hover:text-amber-400 smooth-transition" data-i18n="nav_about">Biz haqimizda</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4" data-i18n="footer_contact">Aloqa</h4>
+                    <ul class="space-y-2 text-sm text-coffee-400">
+                        <li><i class="fa-solid fa-location-dot mr-2 text-amber-500"></i> Toshkent sh., Amir Temur ko'chasi 45</li>
+                        <li><i class="fa-solid fa-phone mr-2 text-amber-500"></i> +998 91 538 70 92</li>
+                        <li><i class="fa-solid fa-envelope mr-2 text-amber-500"></i> support@aromacraft.uz</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4" data-i18n="footer_social">Ijtimoiy tarmoqlar</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-lg bg-coffee-800 flex items-center justify-center hover:bg-amber-600 hover:text-white smooth-transition"><i class="fa-brands fa-telegram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-lg bg-coffee-800 flex items-center justify-center hover:bg-amber-600 hover:text-white smooth-transition"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-lg bg-coffee-800 flex items-center justify-center hover:bg-amber-600 hover:text-white smooth-transition"><i class="fa-brands fa-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-coffee-800 pt-8 text-center text-xs text-coffee-500">
+                &copy; 2026 Aroma Craft Coffee. All rights reserved. Senior Full-Stack Architecture.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Translations Dictionary
+        const translations = {
+            uz: {
+                nav_home: "Bosh sahifa",
+                nav_shop: "Katalog",
+                nav_product: "Mahsulot",
+                nav_cart: "Savatcha",
+                nav_about: "Biz haqimizda",
+                shop_header_title: "Kofe Katalogi va Sevimlilar",
+                shop_header_desc: "O'zingizga yoqqan eng sara donlarni tanlang va savatchaga qo'shing.",
+                tab_catalog: "Katalog",
+                tab_wishlist: "Sevimlilar",
+                filters_title: "Filtrlar",
+                reset_filter: "Tozalash",
+                search_label: "Qidiruv",
+                category_label: "Kategoriya",
+                cat_all: "Barcha turlar",
+                roast_label: "Qovurish darajasi",
+                sort_default: "Saralash: Asosiy",
+                sort_price_low: "Narx: Arzondan qimmatga",
+                sort_price_high: "Narx: Qimmatdan arzonga",
+                sort_name: "Nomi bo'yicha (A-Z)",
+                empty_wishlist_title: "Sevimlilar ro'yxati bo'sh",
+                empty_wishlist_desc: "Hali hech qanday tovarga yurakcha (like) bosmagansiz. Katalogdan yoqqan mahsulotlarni belgilang!",
+                go_catalog: "Katalogga o'tish",
+                footer_desc: "Haqiqiy kofe ixlosmandlari uchun maxsus tayyorlangan premium internet do'kon va qahva uyi.",
+                footer_links: "Tezkor havolalar",
+                footer_contact: "Aloqa",
+                footer_social: "Ijtimoiy tarmoqlar",
+                add_to_cart: "Savatchaga",
+                products_found: "ta mahsulot topildi"
+            },
+            ru: {
+                nav_home: "Главная",
+                nav_shop: "Каталог",
+                nav_product: "Товар",
+                nav_cart: "Корзина",
+                nav_about: "О нас",
+                shop_header_title: "Каталог кофе и Избранное",
+                shop_header_desc: "Выберите лучшие зерна по вашему вкусу и добавьте в корзину.",
+                tab_catalog: "Каталог",
+                tab_wishlist: "Избранное",
+                filters_title: "Фильтры",
+                reset_filter: "Сбросить",
+                search_label: "Поиск",
+                category_label: "Категория",
+                cat_all: "Все виды",
+                roast_label: "Степень обжарки",
+                sort_default: "Сортировка: По умолчанию",
+                sort_price_low: "Цена: По возрастанию",
+                sort_price_high: "Цена: По убыванию",
+                sort_name: "По названию (А-Я)",
+                empty_wishlist_title: "Список избранного пуст",
+                empty_wishlist_desc: "Вы еще не добавили ни одного товара в избранное. Отметьте понравившиеся товары из каталога!",
+                go_catalog: "Перейти в каталог",
+                footer_desc: "Премиальный интернет-магазин и кофейня, созданные специально для истинных любителей кофе.",
+                footer_links: "Быстрые ссылки",
+                footer_contact: "Контакты",
+                footer_social: "Социальные сети",
+                add_to_cart: "В корзину",
+                products_found: "товаров найдено"
+            },
+            en: {
+                nav_home: "Home",
+                nav_shop: "Shop",
+                nav_product: "Product",
+                nav_cart: "Cart",
+                nav_about: "About Us",
+                shop_header_title: "Coffee Catalog & Wishlist",
+                shop_header_desc: "Choose the finest coffee beans to your taste and add them to your cart.",
+                tab_catalog: "Catalog",
+                tab_wishlist: "Wishlist",
+                filters_title: "Filters",
+                reset_filter: "Reset",
+                search_label: "Search",
+                category_label: "Category",
+                cat_all: "All Types",
+                roast_label: "Roast Level",
+                sort_default: "Sorting: Default",
+                sort_price_low: "Price: Low to High",
+                sort_price_high: "Price: High to Low",
+                sort_name: "By Name (A-Z)",
+                empty_wishlist_title: "Wishlist is Empty",
+                empty_wishlist_desc: "You haven't added any products to your wishlist yet. Mark your favorites from the catalog!",
+                go_catalog: "Go to Catalog",
+                footer_desc: "A premium online store and coffee shop specially crafted for true coffee enthusiasts.",
+                footer_links: "Quick Links",
+                footer_contact: "Contact",
+                footer_social: "Social Media",
+                add_to_cart: "Add to Cart",
+                products_found: "products found"
+            }
+        };
+
+        // Comprehensive Products Database (8 Distinct Coffee Products with unique Unsplash images)
+        const products = [
+            { id: 1, name: "Ethiopia Yirgacheffe", category: "Don Kofe", roast: "Light", price: 145000, image: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&q=80&w=600", rating: 5 },
+            { id: 2, name: "Colombia Supremo", category: "Maydalangan", roast: "Medium", price: 180000, image: "https://images.unsplash.com/photo-1587734195503-904fca47e0e9?auto=format&fit=crop&q=80&w=600", rating: 5 },
+            { id: 3, name: "Brazil Santos Dark", category: "Don Kofe", roast: "Dark", price: 320000, image: "https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?auto=format&fit=crop&q=80&w=600", rating: 4 },
+            { id: 4, name: "Guatemala Antigua", category: "Don Kofe", roast: "Medium", price: 160000, image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=80&w=600", rating: 5 },
+            { id: 5, name: "Sumatra Mandheling", category: "Maydalangan", roast: "Dark", price: 195000, image: "https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&q=80&w=600", rating: 5 },
+            { id: 6, name: "Costa Rica Tarrazu", category: "Don Kofe", roast: "Light", price: 175000, image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80&w=600", rating: 4 },
+            { id: 7, name: "Italian Espresso Pods", category: "Kapsulalar", roast: "Dark", price: 210000, image: "https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&q=80&w=600", rating: 5 },
+            { id: 8, name: "Kenya AA Organic", category: "Don Kofe", roast: "Medium", price: 230000, image: "https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&q=80&w=600", rating: 5 }
+        ];
+
+        // State
+        let currentLang = localStorage.getItem('aroma_lang') || 'uz';
+        let currentTheme = localStorage.getItem('aroma_theme') || 'light';
+        let cart = JSON.parse(localStorage.getItem('aroma_cart')) || [];
+        let wishlist = JSON.parse(localStorage.getItem('aroma_wishlist')) || [];
+        let activeTab = 'catalog';
+
+        // DOM elements
+        const langSwitch = document.getElementById('langSwitch');
+        const themeToggle = document.getElementById('themeToggle');
+        const cartBadge = document.getElementById('cartBadge');
+        const wishlistBadge = document.getElementById('wishlistBadge');
+        const wishlistCountTag = document.getElementById('wishlistCountTag');
+        const shopProductGrid = document.getElementById('shopProductGrid');
+        const wishlistGrid = document.getElementById('wishlistGrid');
+        const searchInput = document.getElementById('searchInput');
+        const sortBy = document.getElementById('sortBy');
+        const productCountText = document.getElementById('productCountText');
+        const filterSection = document.getElementById('filterSection');
+        const wishlistContainer = document.getElementById('wishlistContainer');
+        const emptyWishlist = document.getElementById('emptyWishlist');
+        const tabCatalogBtn = document.getElementById('tabCatalogBtn');
+        const tabWishlistBtn = document.getElementById('tabWishlistBtn');
+
+        // Init
+        function initApp() {
+            langSwitch.value = currentLang;
+            applyTranslations(currentLang);
+            if (currentTheme === 'dark') document.documentElement.classList.add('dark');
+            renderProducts();
+            updateBadges();
+
+            // Check if URL has #wishlist hash
+            if (window.location.hash === '#wishlist') {
+                switchTab('wishlist');
+            }
+        }
+
+        function applyTranslations(lang) {
+            currentLang = lang;
+            localStorage.setItem('aroma_lang', lang);
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+        }
+
+        // Switch Tabs (Catalog vs Wishlist)
+        window.switchTab = function(tab) {
+            activeTab = tab;
+            if (tab === 'catalog') {
+                filterSection.classList.remove('hidden');
+                shopProductGrid.classList.remove('hidden');
+                wishlistContainer.classList.add('hidden');
+                tabCatalogBtn.className = "px-5 py-2 rounded-lg font-bold text-sm bg-white dark:bg-coffee-800 text-amber-600 dark:text-amber-400 shadow-sm smooth-transition";
+                tabWishlistBtn.className = "px-5 py-2 rounded-lg font-bold text-sm text-coffee-700 dark:text-coffee-300 hover:text-amber-600 smooth-transition flex items-center space-x-2";
+                renderProducts();
+            } else {
+                filterSection.classList.add('hidden');
+                shopProductGrid.classList.add('hidden');
+                wishlistContainer.classList.remove('hidden');
+                tabWishlistBtn.className = "px-5 py-2 rounded-lg font-bold text-sm bg-white dark:bg-coffee-800 text-amber-600 dark:text-amber-400 shadow-sm smooth-transition flex items-center space-x-2";
+                tabCatalogBtn.className = "px-5 py-2 rounded-lg font-bold text-sm text-coffee-700 dark:text-coffee-300 hover:text-amber-600 smooth-transition";
+                renderWishlist();
+            }
+        }
+
+        // Filter and Render Products
+        function renderProducts() {
+            const searchQuery = searchInput.value.toLowerCase();
+            const selectedCategory = document.querySelector('input[name="category"]:checked').value;
+            const selectedRoasts = Array.from(document.querySelectorAll('.roast-checkbox:checked')).map(cb => cb.value);
+            const sortVal = sortBy.value;
+
+            // Filter
+            let filtered = products.filter(p => {
+                const matchesSearch = p.name.toLowerCase().includes(searchQuery);
+                const matchesCategory = selectedCategory === 'all' || p.category === selectedCategory;
+                const matchesRoast = selectedRoasts.length === 0 || selectedRoasts.includes(p.roast);
+                return matchesSearch && matchesCategory && matchesRoast;
+            });
+
+            // Sort
+            if (sortVal === 'price_low') filtered.sort((a, b) => a.price - b.price);
+            if (sortVal === 'price_high') filtered.sort((a, b) => b.price - a.price);
+            if (sortVal === 'name') filtered.sort((a, b) => a.name.localeCompare(b.name));
+
+            productCountText.textContent = `${filtered.length} ${translations[currentLang].products_found}`;
+
+            shopProductGrid.innerHTML = '';
+            if (filtered.length === 0) {
+                shopProductGrid.innerHTML = `<div class="col-span-full text-center py-16 text-coffee-500 font-medium">Hech qanday mahsulot topilmadi.</div>`;
+                return;
+            }
+
+            filtered.forEach(p => {
+                const isLiked = wishlist.includes(p.id);
+                const card = document.createElement('div');
+                card.className = "bg-white dark:bg-coffee-900 rounded-2xl p-4 shadow-lg border border-coffee-200 dark:border-coffee-800 flex flex-col justify-between group smooth-transition hover:-translate-y-1";
+                card.innerHTML = `
+                    <div class="relative overflow-hidden rounded-xl mb-4 h-56">
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 smooth-transition">
+                        <button onclick="toggleWishlist(${p.id})" class="absolute top-3 right-3 w-10 h-10 rounded-full bg-white/80 dark:bg-coffee-900/80 backdrop-blur-md flex items-center justify-center text-rose-500 shadow-md hover:scale-110 smooth-transition">
+                            <i class="${isLiked ? 'fa-solid' : 'fa-regular'} fa-heart text-lg"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-2 mb-4">
+                        <span class="text-xs font-semibold text-amber-600 dark:text-amber-400 uppercase tracking-wider">${p.category} • ${p.roast} Roast</span>
+                        <h3 class="text-lg font-bold text-coffee-900 dark:text-white">${p.name}</h3>
+                        <div class="flex items-center space-x-1 text-amber-500 text-xs">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            <span class="text-coffee-500 ml-1">(${p.rating}.0)</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-coffee-100 dark:border-coffee-800">
+                        <span class="text-xl font-extrabold text-coffee-900 dark:text-white">${p.price.toLocaleString()} so'm</span>
+                        <button onclick="addToCart(${p.id})" class="px-4 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-sm shadow-md shadow-amber-600/20 flex items-center space-x-2 smooth-transition">
+                            <i class="fa-solid fa-shopping-bag"></i>
+                            <span>${translations[currentLang].add_to_cart}</span>
+                        </button>
+                    </div>
+                `;
+                shopProductGrid.appendChild(card);
+            });
+        }
+
+        // Render Wishlist Tab
+        function renderWishlist() {
+            const likedProducts = products.filter(p => wishlist.includes(p.id));
+            wishlistGrid.innerHTML = '';
+
+            if (likedProducts.length === 0) {
+                wishlistGrid.classList.add('hidden');
+                emptyWishlist.classList.remove('hidden');
+                return;
+            }
+
+            wishlistGrid.classList.remove('hidden');
+            emptyWishlist.classList.add('hidden');
+
+            likedProducts.forEach(p => {
+                const card = document.createElement('div');
+                card.className = "bg-white dark:bg-coffee-900 rounded-2xl p-4 shadow-lg border border-coffee-200 dark:border-coffee-800 flex flex-col justify-between group smooth-transition hover:-translate-y-1";
+                card.innerHTML = `
+                    <div class="relative overflow-hidden rounded-xl mb-4 h-56">
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 smooth-transition">
+                        <button onclick="toggleWishlist(${p.id})" class="absolute top-3 right-3 w-10 h-10 rounded-full bg-white/80 dark:bg-coffee-900/80 backdrop-blur-md flex items-center justify-center text-rose-500 shadow-md hover:scale-110 smooth-transition">
+                            <i class="fa-solid fa-heart text-lg"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-2 mb-4">
+                        <span class="text-xs font-semibold text-amber-600 dark:text-amber-400 uppercase tracking-wider">${p.category}</span>
+                        <h3 class="text-lg font-bold text-coffee-900 dark:text-white">${p.name}</h3>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-coffee-100 dark:border-coffee-800">
+                        <span class="text-xl font-extrabold text-coffee-900 dark:text-white">${p.price.toLocaleString()} so'm</span>
+                        <button onclick="addToCart(${p.id})" class="px-4 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-sm shadow-md shadow-amber-600/20 flex items-center space-x-2 smooth-transition">
+                            <i class="fa-solid fa-shopping-bag"></i>
+                            <span>${translations[currentLang].add_to_cart}</span>
+                        </button>
+                    </div>
+                `;
+                wishlistGrid.appendChild(card);
+            });
+        }
+
+        // Toggle Wishlist
+        window.toggleWishlist = function(id) {
+            const index = wishlist.indexOf(id);
+            if (index > -1) {
+                wishlist.splice(index, 1);
+            } else {
+                wishlist.push(id);
+            }
+            localStorage.setItem('aroma_wishlist', JSON.stringify(wishlist));
+            updateBadges();
+            if (activeTab === 'catalog') renderProducts();
+            else renderWishlist();
+        }
+
+        // Add to Cart
+        window.addToCart = function(id) {
+            const product = products.find(p => p.id === id);
+            const existing = cart.find(item => item.id === id);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+            localStorage.setItem('aroma_cart', JSON.stringify(cart));
+            updateBadges();
+            alert(`"${product.name}" savatchaga qo'shildi!`);
+        }
+
+        // Update Badges
+        function updateBadges() {
+            cartBadge.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+            wishlistBadge.textContent = wishlist.length;
+            wishlistCountTag.textContent = wishlist.length;
+        }
+
+        // Reset Filters
+        window.resetFilters = function() {
+            searchInput.value = '';
+            document.querySelector('input[name="category"][value="all"]').checked = true;
+            document.querySelectorAll('.roast-checkbox').forEach(cb => cb.checked = false);
+            sortBy.value = 'default';
+            renderProducts();
+        }
+
+        // Event Listeners
+        searchInput.addEventListener('input', renderProducts);
+        sortBy.addEventListener('change', renderProducts);
+        document.querySelectorAll('input[name="category"]').forEach(radio => radio.addEventListener('change', renderProducts));
+        document.querySelectorAll('.roast-checkbox').forEach(cb => cb.addEventListener('change', renderProducts));
+
+        langSwitch.addEventListener('change', (e) => {
+            applyTranslations(e.target.value);
+            if (activeTab === 'catalog') renderProducts();
+            else renderWishlist();
+        });
+
+        themeToggle.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                currentTheme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                currentTheme = 'dark';
+            }
+            localStorage.setItem('aroma_theme', currentTheme);
+        });
+
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>
